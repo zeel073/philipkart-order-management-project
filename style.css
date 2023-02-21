@@ -1,0 +1,46 @@
+header{
+    height: 7rem;
+    background-color: #9e8d8d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#loginButton{
+    margin-left: 1rem;
+}
+section h1{
+    width: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+#orderTable{
+    width: 60vw;
+    border: 1px solid rgb(211,201,201);
+    /* margin-bottom: 5rem;     */
+}
+td{
+    /* border: 1px solid black; */
+    border-bottom: 1px solid rgb(211,201,201);
+}
+#orderTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#orderTable tr:hover {
+    background-color: #ddd;
+}
+/* th,td{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    padding-left: 5px;
+    text-align: center;
+} */
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+

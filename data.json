@@ -1,0 +1,94 @@
+export const orderdata=[
+    {
+        "Order Id" : "234",
+        "Item name" : "Santoor soap",
+        "Quantities" : "51",
+        "Price" : "56"
+    },
+    {
+        "Order Id" : "235",
+        "Item name" : "Himalaya face wash",
+        "Quantities" : "12",
+        "Price" : "45"
+    },
+    {
+        "Order Id" : "236",
+        "Item name" : "Himalaya soap",
+        "Quantities" : "43",
+        "Price" : "199"
+    },
+    {
+        "Order Id" : "237",
+        "Item name" : "Garnier face wash",
+        "Quantities" : "6",
+        "Price" : "23"
+    },
+    {
+        "Order Id" : "238",
+        "Item name" : "Cinthol soap",
+        "Quantities" : "34",
+        "Price" : "78"
+    },
+    {
+        "Order Id" : "239",
+        "Item name" : "Nivea face wash",
+        "Quantities" : "11",
+        "Price" : "90"
+    },
+    {
+        "Order Id" : "240",
+        "Item name" : "Garnier soap",
+        "Quantities" : "10",
+        "Price" : "60"
+    },
+    {
+        "Order Id" : "241",
+        "Item name" : "Neem face wash",
+        "Quantities" : "23",
+        "Price" : "30"
+    },
+    {
+        "Order Id" : "242",
+        "Item name" : "Lifeboy soap",
+        "Quantities" : "15",
+        "Price" : "75"
+    },
+    {
+        "Order Id" : "243",
+        "Item name" : "Trivia shampoo",
+        "Quantities" : "3",
+        "Price" : "45"
+    },
+    {
+        "Order Id" : "244",
+        "Item name" : "Godrej shampoo",
+        "Quantities" : "1",
+        "Price" : "35"
+    },
+    {
+        "Order Id" : "245",
+        "Item name" : "Godrej hair colour",
+        "Quantities" : "9",
+        "Price" : "23"
+    },
+    {
+        "Order Id" : "246",
+        "Item name" : "Adidas shoes",
+        "Quantities" : "15",
+        "Price" : "110"
+    },
+    {
+        "Order Id" : "247",
+        "Item name" : "Nike shoes",
+        "Quantities" : "25",
+        "Price" : "1500"
+    },
+    {
+        "Order Id" : "248",
+        "Item name" : "Air jordan shoes",
+        "Quantities" : "10",
+        "Price" : "80000"
+    }
+    
+ 
+]

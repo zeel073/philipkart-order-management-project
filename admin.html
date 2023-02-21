@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin panel</title>
+  <script src="jquery-3.6.3.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.2/datatables.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.2/datatables.min.css" />
+
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    #orderTable {
+      width: 60vw;
+      border: 1px solid rgb(211, 201, 201);
+    }
+
+    td {
+      border-bottom: 1px solid rgb(211, 201, 201);
+    }
+
+    #orderTable tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #orderTable tr:hover {
+      background-color: #ddd;
+    }
+
+
+
+    .modal-confirm {
+      color: #636363;
+      width: 400px;
+    }
+
+    .modal-confirm .modal-content {
+      padding: 20px;
+      border-radius: 5px;
+      border: none;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .modal-confirm .modal-header {
+      border-bottom: none;
+      position: relative;
+    }
+
+    .modal-confirm h4 {
+      text-align: center;
+      font-size: 26px;
+      margin: 30px 0 -10px;
+    }
+
+    .modal-confirm .close {
+      position: absolute;
+      top: -5px;
+      right: -2px;
+    }
+
+    .modal-confirm .modal-body {
+      color: #999;
+    }
+
+    .modal-confirm .modal-footer {
+      border: none;
+      text-align: center;
+      border-radius: 5px;
+      font-size: 13px;
+      padding: 10px 15px 25px;
+    }
+
+    .modal-confirm .modal-footer a {
+      color: #999;
+    }
+
+    .modal-confirm .icon-box {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      border-radius: 50%;
+      z-index: 9;
+      text-align: center;
+      border: 3px solid #f15e5e;
+    }
+
+    .modal-confirm .icon-box i {
+      color: #f15e5e;
+      font-size: 46px;
+      display: inline-block;
+      margin-top: 13px;
+    }
+
+    .modal-confirm .btn,
+    .modal-confirm .btn:active {
+      color: #fff;
+      border-radius: 4px;
+      background: #60c7c1;
+      text-decoration: none;
+      transition: all 0.4s;
+      line-height: normal;
+      min-width: 120px;
+      border: none;
+      min-height: 40px;
+      border-radius: 3px;
+      margin: 0 5px;
+    }
+
+    .modal-confirm .btn-secondary {
+      background: #c1c1c1;
+    }
+
+    .modal-confirm .btn-secondary:hover,
+    .modal-confirm .btn-secondary:focus {
+      background: #a8a8a8;
+    }
+
+    .modal-confirm .btn-danger {
+      background: #f15e5e;
+    }
+
+    .modal-confirm .btn-danger:hover,
+    .modal-confirm .btn-danger:focus {
+      background: #ee3535;
+    }
+
+    .trigger-btn {
+      display: inline-block;
+      margin: 100px auto;
+    }
+
+    #profileImg {
+      cursor: pointer;
+    }
+
+    #ul li {
+      cursor: pointer;
+    }
+    #changeUserName:hover,
+    #changePassword:hover,
+    #changeProfilePic:hover {
+      background-color: #b4afaf;
+    }
+    @media (max-width: 575.98px) {
+      .mt-xs-1 {
+        margin-top: 1rem;
+        /* margin-bottom: 2rem; */
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #c5c5c5;">
+    <div class="container-fluid">
+      <a style="font-size: 1.5rem;" class="navbar-brand text-danger" href="#">Philipkart</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a style="font-size: 1.5rem;" class="nav-link " aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a style="font-size: 1.5rem;" class="nav-link active" href="/admin.html" target="">Admin page</a>
+          </li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right  mb-2 mb-lg-0">
+
+          <!-- <a  id="loginButton" class="btn btn-primary btn-lg mx-2" role="button">Login</a>
+          <a href="signup.html" id="signupButton" class="btn btn-danger btn-lg mx-2" role="button">Sign Up</a>  -->
+          <!-- <li class="nav-item"> -->
+          <div id="adminUserName" style="font-size: 1.5rem;" class="d-flex align-items-center "></div>
+
+          <div class=" dropdown d-flex align-items-center rounded-circle profile-image-container mx-lg-2">
+            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <img id="profileImg" src="img1.png" alt="User Profile Image" class="rounded-circle profile-image" width="40rem" height="45rem">
+              <!-- <span class="caret"></span> -->
+            </button>
+            <ul id="ul" class="dropdown-menu" role="menu" aria-labelledby="menu1">
+              <li>
+                <div class="dropdown-item" id="changeProfilePic">Change profile picture</div>
+                <input type="file" id="file-input" style="display: none;" accept="image/*">
+              </li>
+              <li>
+                <div id="changeUserName" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalLoginAvatar"> Change user name</div>
+              </li>
+              
+              <li>
+                <div id="changePassword" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#exampleModal">Change password</div>
+              </li>
+            </ul>
+          </div>
+          
+          <li class="nav-item">
+            <a href="index.html"><button id="logOut"
+              class="btn btn-primary btn-lg btn-block mx-lg-2 my-sm-2 mt-xs-1">Log out</button></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!--Modal: Login with Avatar Form-->
+<div class="modal fade" id="modalLoginAvatar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+aria-hidden="true">
+<div class="modal-dialog cascading-modal modal-avatar modal-sm" role="document">
+  <!--Content-->
+  <div class="modal-content">
+
+    <!--Header-->
+    <div class="modal-header">
+      <img id="userNameImg" src="img1.png" height="150rem" width="150rem" alt="avatar" class="rounded-circle img-responsive">
+    </div>
+    <!--Body-->
+    <div class="modal-body text-center mb-1">
+
+      <h5 id="currentUserName" class="mt-1 mb-2">Maria Doe</h5>
+
+      <div class="md-form ml-0 mr-0">
+        <input type="text" id="form29" class="form-control form-control-sm validate ml-0">
+        <small id="errorUserNameChange" style="color: red; display: none;">Enter valid user name</small>
+        <label data-error="wrong" data-success="right" for="form29" class="ml-0">Enter new user name</label>
+      </div>
+
+      <div class="text-center mt-4">
+        <button id="saveUserName" class="btn btn-cyan mt-1 btn-success">Save</button>
+      </div>
+    </div>
+
+  </div>
+  <!--/.Content-->
+</div>
+</div>
+<!--Modal: Login with Avatar Form-->
+
+<!-- password change modal -->
+<div class="modal top fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+     aria-hidden="true" data-mdb-backdrop="true" data-mdb-keyboard="true">
+    <div class="modal-dialog" style="width: 300px;">
+        <div class="modal-content text-center">
+            <div class="modal-header h5 text-white bg-primary justify-content-center">
+                Password Reset
+            </div>
+            <div class="modal-body px-5">
+                <div class="form-outline">
+                    <input type="text" id="currentPassword" class="form-control " placeholder="Enter current password"/>
+                    <small id="errorCurrentPasswordChange" style="color: red; display: none;">Incorrect current password</small>
+                    <input type="text" id="newPassword" class="form-control mt-3" placeholder="Enter new password"/>
+                    <small id="errorPasswordChange" style="color: red; display: none;">New password should at least 3 chars long.</small>
+                    <input type="text" id="newConfirmPassword" class="form-control mt-3" placeholder="Confirm new password"/>
+                    <small id="errorConfirmPasswordChange" style="color: red; display: none;">It should match with above password</small>
+                </div>
+                <button id="resetPasswordButton" class="btn btn-primary w-100 my-2">Reset password</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Password change modal -->
+
+    <div class="text-center my-2" style="height: 5rem; align-items: center; display: flex; justify-content: center;">
+      <h1 id="admin" class="py-2">Admin Panel</h1>
+    </div>
+    
+  <section class="">
+    <div class="container table-responsive">
+      <div class="crud-buttons d-flex">
+
+        <button type="button" style="float: right;" class="btn btn-primary" data-bs-toggle="modal"
+          data-bs-target="#formModal">
+          New order
+        </button>
+
+
+
+        <button id="deleteButton" disabled type="button" style="float: right;" class="btn btn-danger mx-2"
+          data-bs-toggle="modal" data-bs-target="#deleteModal">
+          Delete order
+        </button>
+        <div id="deleteModal" class="modal fade">
+          <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+              <div class="modal-header flex-column">
+                <!-- <div class="icon-box">
+                <i class="material-icons">&#xE5CD;</i>
+              </div>						 -->
+                <h4 class="modal-title w-100">Are you sure?</h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+              </div>
+              <div class="modal-body">
+                <p>Do you really want to delete these order? This process cannot be undone.</p>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="deleteModalButton" class="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <button id="editButton" disabled type="button" style="float: right;" class="btn btn-success"
+          data-bs-toggle="modal" data-bs-target="#editModal">
+          Edit order
+        </button>
+      </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add new order</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="form">
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="addOrderId" placeholder="Input order Id">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="addItemName" placeholder="Input item name">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="addQuantities" placeholder="Input quantities">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="addPrice" placeholder="Input price">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" id="submitButton" class="btn btn-primary"
+                    data-bs-dismiss="modal">Submit</button>
+                  <!-- <input type="submit" id="submit" class="btn btn-primary" value="submit"> -->
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Edit Modal -->
+
+      <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Edit selected order</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="form2">
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="editOrderId" value="" placeholder="Input order Id">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="editItemName" value="" placeholder="Input item name">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="editQuantities" value="" placeholder="Input quantities">
+                </div>
+                <div class="mb-3">
+                  <input type="text" class="form-control" id="editPrice" value="" placeholder="Input price">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button id="updateButton" data-bs-toggle="modal" data-bs-target="#editModal" class="btn btn-primary"
+                    value="Update">Update</button>
+
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="last" class="table">
+        <table id="orderTable" class="table-responsive">
+          <thead>
+            <tr>
+              <th>Order Id</th>
+              <th>Item name</th>
+              <th>Quantities</th>
+              <th>Price</th>
+              <!-- <th>Action</th> -->
+            </tr>
+          </thead>
+          <tbody id="tbody">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th>Order Id</th>
+              <th>Item name</th>
+              <th>Quantities</th>
+              <th>Price</th>
+              <!-- <th>Action</th> -->
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+  <script src="table.js" type="module"></script>
+</body>
+
+</html>
