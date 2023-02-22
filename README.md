@@ -80,10 +80,3 @@ value:
     "Price": "999"
   }
 ]
-
-
-key: SignUp, value: [{"userName":"zeel980","password":"zeel6813"}]
-
-key: currentUser, value: "zeel073"
-
-[remove signup and signin key value pairs]
