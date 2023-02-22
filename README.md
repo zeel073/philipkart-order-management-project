@@ -1,6 +1,7 @@
 # philipkart-order-management-project
-This project allows users to login and signup through username and password. 
+This project allows users to login through username and password. 
 It also allows users to sign up.
+Users can also manage products in their cart.
 
 For better understanding, add below key value pairs in your local storage (*required).
 
