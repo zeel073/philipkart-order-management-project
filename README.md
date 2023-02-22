@@ -85,4 +85,4 @@ value:
 key: SignUp,
 value: [{"userName":"zeel073","password":"aaa"}]
 
-You can add more accoung by signing in.
+You can add more account by signing in.
