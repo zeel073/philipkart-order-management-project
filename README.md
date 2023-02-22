@@ -1,21 +1,21 @@
-# philipkart-order-project (change title to: philipkart-order-management-project)
+# philipkart-order-management-project
 This project allows users to login and signup through username and password. 
 It also allows users to sign up.
 
 For better understanding, add below key value pairs in your local storage (*required).
 
 key: newOrder, 
-value: 
+value:
 [
-  {
-    "OrderId": "240",
-    "ItemName": "Garnier soap",
-    "Quantities": "10",
-    "Price": "60"
-  },
-  {
-    "OrderId": "241",
-    "ItemName": "Neem face wash",
+{
+"OrderId": "240",
+"ItemName": "Garnier soap",
+"Quantities": "10",
+"Price": "60"
+},
+{
+"OrderId": "241",
+"ItemName": "Neem face wash",
     "Quantities": "23",
     "Price": "30"
   },
@@ -80,3 +80,8 @@ value:
     "Price": "999"
   }
 ]
+
+key: SignUp,
+value: [{"userName":"zeel073","password":"aaa"}]
+
+You can add more accoung by signing in.
