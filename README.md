@@ -5,7 +5,8 @@ Users can also manage products in their cart.
 
 For better understanding, add below key value pairs in your local storage (*required).
 
-key: newOrder, 
+key: newOrder,
+
 value:
 [
 {
